@@ -1,41 +1,38 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BuildingEscape.h"
-#include "PositionRecord.h"
+#include "OpenDoor.h"
 
 
 // Sets default values for this component's properties
-UPositionRecord::UPositionRecord()
+UOpenDoor::UOpenDoor()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
-
-	
 }
 
 
 // Called when the game starts
-void UPositionRecord::BeginPlay()
+void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	// Find the door
 
-	FString ObjName = GetOwner()->GetName();
-	
-	
+	AActor* Owner = GetOwner();
+	//Create rotator
+	FRotator NewRotation = FRotator(0.0f, 90.0f, 0.0f);//pitch yaw roll
 
-	FString ObjPosition = GetOwner()->GetTransform().GetLocation().ToString();
-	//careful: pointer
-	UE_LOG(LogTemp, Warning, TEXT("Hello World! This is a %s at %s"), *ObjName, *ObjPosition);//yellow output https://wiki.unrealengine.com/Logs,_Printing_Messages_To_Yourself_During_Runtime
+
+	Owner->SetActorRotation(NewRotation);
 }
 
 
 // Called every frame
-void UPositionRecord::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
