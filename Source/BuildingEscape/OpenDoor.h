@@ -19,21 +19,24 @@ public:
 	virtual void BeginPlay() override;
 
 	void OpenDoor();
-	
+	void CloseDoor();
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 private:
 	//make private visable etc in Unreal: like in Unity public
 	UPROPERTY(VisibleAnywhere)
-	float OpenAngle = 90.0f;
+	float OpenAngle = 0.0f;
 	
 	//relate to TriggerVolume to trigger events		
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
-	//UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere)
+		float DoorCloseDelay = 0.5f;
+	float LastDoorOpenTime;
+
 	//pawn inherits from Actor
 	AActor* ActorThatOpens;
-	
+	AActor* Owner = GetOwner();
 };
