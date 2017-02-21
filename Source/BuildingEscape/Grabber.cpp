@@ -42,6 +42,21 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 	FString Rotation = PlayerViewPointRotation.ToString();
 	//careful: pointer
 	UE_LOG(LogTemp, Warning, TEXT("P:%s R: %s"), *Position, *Rotation);
+	
+	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
+	//Draw a red line to debug ray cast
+	DrawDebugLine(
+		GetWorld(),
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FColor(255, 0, 0),
+		false,
+		0.f,
+		0.f,
+		10.f
+		);
+
+
 	//Ray cast
 
 }
